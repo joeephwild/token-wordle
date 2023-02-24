@@ -2,10 +2,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import Navbar from '../components/Navbar'
-import LogReg2 from '../components/LogReg2'
-import Footer from '../components/Footer'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
@@ -17,11 +15,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Navbar hideLogin={false}/>
-        {/* <LogReg2 /> */}
-        {/* <Footer /> */}
-        {/* <Signup /> */}
+        <Navbar />
       </main>
     </>
-  )
+  );
 }
