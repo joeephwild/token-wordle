@@ -4,7 +4,8 @@ import { Inter } from "@next/font/google";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 // import Staking from "./staking";
-import StakedAssets from "./stakedAssets";
+import Account from "./account";
+// import StakedAssets from "./stakedAssets";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,7 @@ export default function Home() {
       </Head>
       <main>
         <Navbar />
-        <StakedAssets />
+        <Account />
         <Footer />
       </main>
     </>
