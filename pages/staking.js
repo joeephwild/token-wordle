@@ -3,25 +3,15 @@ import Image from "next/image";
 import { Inter } from "@next/font/google";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import StakingHeader from "../components/StakingHeader";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Staking() {
   return (
     <>
-      <Navbar />
       <div className="px-10 py-5 mx-20 my-10 border-2 rounded-lg lato">
-        <div className="flex mb-10 justify-between items-center">
-          <div className="px-10 py-5 w-1/4 text-center bg-blue-400 cursor-pointer">
-            <h1> Staking Amount</h1>
-          </div>
-          <div className="px-10 py-5 w-1/4 text-center bg-white cursor-pointer">
-            <h1>Staked Assets</h1>
-          </div>
-          <div className="px-10 py-5 w-1/4 text-center bg-white cursor-pointer">
-            <h1>Withdrawal</h1>
-          </div>
-        </div>
+        <StakingHeader />
         <hr className="mb-10" />
         <div className="flex gap-20 justify-between ">
           <div className="w-1/2">
@@ -60,8 +50,6 @@ export default function Staking() {
           </div>
         </div>
       </div>
-
-      <Footer />
     </>
   );
 }
