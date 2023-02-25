@@ -69,3 +69,7 @@ body {
 .mirror{
   background-color: rgba(245, 245, 245, 0.3);
 }
+.home-card{
+  background: url('../public/images/curvyBg.png');
+  background-size: cover;
+}

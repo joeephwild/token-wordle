@@ -18,7 +18,7 @@ export default function MainNavbar(){
                     <a href="" className="block px-8 py-4 hover:border">Account</a>
                     <a href="" className="block px-8 py-4 hover:border">Scores</a>
                     <a href="" className="block px-8 py-4 hover:border">Tokens</a>
-                    <button className="block px-8 py-4 border border-white ml-auto">Connect Wallet</button>
+                    <button className="block px-8 border border-white ml-auto">Connect Wallet</button>
                 </div>
             </div>
         </nav>
