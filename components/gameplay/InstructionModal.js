@@ -8,7 +8,7 @@ export default function InstructionModal({ clickHandler }) {
           What you should know
         </h1>
         <img
-          src="./images/medical-icon_i-information-us.png"
+          src="./images/material-symbols_close-fullscreen.png"
           alt=""
           className="block mr-3"
           onClick={() => clickHandler()}
