@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 // import Staking from "./staking";
 import StakedAssets from "./stakedAssets";
+import InstructionModal from "../components/gameplay/InstructionModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,6 @@ export default function Home() {
       </Head>
       <main>
         <Navbar />
-        <StakedAssets />
         <Footer />
       </main>
     </>

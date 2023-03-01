@@ -1,12 +1,17 @@
 import { useState } from "react";
 import GameScoreCard from "./GameScoreCard";
+import InstructionModal from "./InstructionModal";
 import Keyboard from "./Keyboard";
 import WordBox from "./WordBox";
 
 export default function GameBoard() {
   const [wordBoxes, setWordBoxes] = useState(Array(6).fill([]));
   const [currentWbIndex, setCurrentWbIndex] = useState(0);
+  const [showModal, setShowModal] = useState(false);
 
+  const displayModal = () => {
+    setShowModal(!showModal);
+  };
   const getKeyboardInput = (letter) => {
     if (letter === "Enter") {
       // move to next word box if current one is full
@@ -46,32 +51,37 @@ export default function GameBoard() {
 
   return (
     <div className="h-full bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-20 border border-gray-100 w-[90%] mx-auto mt-8 py-12 relative">
-      <a href="" className="inline-block absolute top-0 left-[97%]">
-        <img
-          src="./images/mdi_close-circle.png"
-          alt="cancel"
-          className="mt-3"
-        />
-      </a>
-      <GameScoreCard />
-      <div className="mt-5 flex w-[80%] mx-auto gap-12">
-        <div className="w-[50%]">
-          {wordBoxes.slice(0, 3).map((box, index) => (
-            <WordBox key={index} wordArray={box} />
-          ))}
-        </div>
-        <div className="w-[50%]">
-          {wordBoxes.slice(3).map((box, index) => (
-            <WordBox key={index} wordArray={box} />
-          ))}
-        </div>
-      </div>
-      <div className="mt-5">
-        <Keyboard clickHandler={getKeyboardInput} />
-      </div>
-      <div className="mt-5">
-        <button className="btn block mx-auto">Submit</button>
-      </div>
+      {showModal && <InstructionModal clickHandler={displayModal} />}
+      {!showModal && (
+        <>
+          <a href="" className="inline-block absolute top-0 left-[97%]">
+            <img
+              src="./images/mdi_close-circle.png"
+              alt="cancel"
+              className="mt-3"
+            />
+          </a>
+          <GameScoreCard clickHandler={displayModal}/>
+          <div className="mt-5 flex w-[80%] mx-auto gap-12">
+            <div className="w-[50%]">
+              {wordBoxes.slice(0, 3).map((box, index) => (
+                <WordBox key={index} wordArray={box} />
+              ))}
+            </div>
+            <div className="w-[50%]">
+              {wordBoxes.slice(3).map((box, index) => (
+                <WordBox key={index} wordArray={box} />
+              ))}
+            </div>
+          </div>
+          <div className="mt-5">
+            <Keyboard clickHandler={getKeyboardInput} />
+          </div>
+          <div className="mt-5">
+            <button className="btn block mx-auto">Submit</button>
+          </div>
+        </>
+      )}
     </div>
   );
 }
