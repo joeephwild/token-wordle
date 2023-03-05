@@ -15,9 +15,9 @@ export default function InfoCard({ cardDetails }) {
           {cardDetails.milestone} correct words
         </span>
       </p>
-      <div className="mt-5 flex justify-between">
-        <p className="text-slate-500">Progress: </p>
-        <ProgressBar percent={cardDetails.progress} />
+      <div className="mt-5 flex jus">
+        <p className="text-slate-500 mr-3">Progress: </p>
+        <ProgressBar value={cardDetails.progress} maxValue={100} />
       </div>
       <div className="mt-5 mb-12">
         <h1 className="text-xl text-black font-bold">Trade NFT</h1>
