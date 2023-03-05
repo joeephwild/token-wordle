@@ -1,7 +1,21 @@
-export default function LetterBox({ letter }) {
-  return (
-    <div className="w-24 h-24 flex justify-center items-center bg-slate-100 text-4xl p-5 rounded-xl">
-      {letter}
-    </div>
-  );
+export default function LetterBox({ letter, correct, wrong }) {
+  if (correct == true) {
+    return (
+      <div className="w-16 h-16 flex justify-center items-center bg-green-400 text-4xl p-5 rounded-xl uppercase font-bold text-white">
+        {letter}
+      </div>
+    );
+  } else if (wrong) {
+    return (
+      <div className="w-16 h-16 flex justify-center items-center bg-yellow-600 text-4xl p-5 rounded-xl uppercase font-bold">
+        {letter}
+      </div>
+    );
+  } else {
+    return (
+      <div className="w-16 h-16 flex justify-center items-center bg-slate-100 text-4xl p-5 rounded-xl uppercase font-bold">
+        {letter}
+      </div>
+    );
+  }
 }

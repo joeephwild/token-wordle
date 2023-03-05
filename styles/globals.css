@@ -72,5 +72,5 @@ body {
   background-size: cover;
 }
 .key {
-  @apply text-lg font-bold p-5 mx-2 cursor-pointer uppercase bg-slate-100 rounded-md;
+  @apply text-lg font-bold p-5 mx-2 cursor-pointer uppercase bg-slate-100 rounded-md mb-2;
 }
