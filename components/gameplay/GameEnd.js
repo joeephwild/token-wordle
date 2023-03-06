@@ -34,6 +34,9 @@ export default function GameEnd({ clickHandler, score, timeBonus, tokensEarned }
           {tokensEarned}TLC
         </h1>
       </div>
+      <div className="mt-8">
+        <button className="bg-slate-100 px-12 py-3 block mx-auto rounded-lg text-lg font-bold">NEXT</button>
+      </div>
       </div>
     </div>
   );
