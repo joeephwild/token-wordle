@@ -19,7 +19,7 @@ export default function LogReg2(){
                     tokenized word game. Experience the thrill of solving puzzles while earning
                     real value in the form of digital assets.
                 </p>
-                <a href="" className="btn mx-auto mt-8">Continue</a>
+                <a href="./signup" className="btn mx-auto mt-8">Continue</a>
             </div>
             
         </section>
