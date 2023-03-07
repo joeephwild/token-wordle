@@ -1,6 +1,6 @@
 export default function HomeCard({amount, desc, key}) {
   return (
-    <div className="w-72 h-72 relative" key={key}>
+    <div className="w-52 h-52 relative" key={key}>
       <img src="./images/curvyBg.png" alt="" className="w-full h-full" />
       <div className="absolute top-16 w-full">
         <h1 className="text-white text-center text-5xl font-semibold">{amount}</h1>

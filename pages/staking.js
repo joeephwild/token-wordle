@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Staking() {
   return (
     <>
-      <div className="px-10 py-5 mx-20 my-10 border-2 rounded-lg lato">
+      <div className="h-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-20 border-2 border-gray-100 w-[90%] px-10 py-5 mx-20 my-10  rounded-lg  lato">
         <StakingHeader />
         <hr className="mb-10" />
         <div className="flex gap-20 justify-between ">
@@ -24,7 +24,7 @@ export default function Staking() {
               <h1>Amount of TLC to stake</h1>
               <input
                 type="text"
-                className="form-input px-4 py-3 rounded-lg w-full"
+                className="form-input px-4 py-3 rounded-lg w-full bg-gray-100 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-20  "
                 placeholder="400.00TLC"
               />
               <p className="text-gray-400">You will have 385TLC remaining</p>
