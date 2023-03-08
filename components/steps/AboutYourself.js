@@ -1,12 +1,10 @@
+import { useStateContext } from "../../contexts/AuthContext";
 import { useStepperContext } from "../../contexts/StepperContext";
 
 export default function Details() {
   const { userData, setUserData } = useStepperContext();
+  const { setFirstName,setLastName,firstName,lastName} = useStateContext()
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserData({ ...userData, [name]: value });
-  };
   return (
     <div className="w-[70%] mx-auto mt-0">
     <h1 className="text-center font-medium text-5xl">Tell us about you</h1>
@@ -17,8 +15,8 @@ export default function Details() {
       <div className="mx-2 w-full flex-1">
         <div className="my-2 flex rounded border-2 border-black">
           <input
-            onChange={handleChange}
-            value={userData["firstname"] || ""}
+            onChange={(e) => setFirstName(e.target.value)}
+            value={firstName}
             name="firstname"
             placeholder="First Name"
             className="w-full p-1 px-2 form-input 
@@ -33,8 +31,8 @@ export default function Details() {
       <div className="mx-2 w-full flex-1">
         <div className="my-2 flex rounded border-2 border-black">
           <input
-            onChange={handleChange}
-            value={userData["lastname"] || ""}
+            onChange={(e) => setLastName(e.target.value)}
+            value={lastName}
             name="lastname"
             placeholder="Last Name"
             className="w-full p-1 px-2 form-input 

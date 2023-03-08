@@ -1,12 +1,9 @@
+import { useStateContext } from "../../contexts/AuthContext";
 import { useStepperContext } from "../../contexts/StepperContext";
 
 export default function Account() {
   const { userData, setUserData } = useStepperContext();
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserData({ ...userData, [name]: value });
-  };
+  const { email, password, setPassword, setConfirmPassword, confirmPassword, setEmail} = useStateContext()
 
   return (
     <div className="w-[70%] mx-auto mt-0">
@@ -18,9 +15,10 @@ export default function Account() {
       <div className="mx-2 w-full flex-1">
         <div className="my-2 flex rounded border-2 border-black">
           <input
-            onChange={handleChange}
-            value={userData["username"] || ""}
+          onChange={(e) => setEmail(e.target.value)}
+            value={email}
             name="username"
+            type="email"
             placeholder="Email Address"
             className="w-full p-1 px-2 form-input 
             block leading-none focus:outline-none placeholder-black/50 
@@ -34,8 +32,8 @@ export default function Account() {
       <div className="mx-2 w-full flex-1">
         <div className="my-2 flex rounded border-2 border-black">
           <input
-            onChange={handleChange}
-            value={userData["password"] || ""}
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
             name="password"
             placeholder="Password"
             type="password"
@@ -51,8 +49,8 @@ export default function Account() {
       <div className="mx-2 w-full flex-1">
         <div className="my-2 flex rounded border-2 border-black">
           <input
-            onChange={handleChange}
-            value={userData["password"] || ""}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+            value={confirmPassword}
             name="password"
             placeholder="Confirm Password"
             type="password"
