@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useStateContext } from "../contexts/AuthContext";
 
 export default function MainNavbar() {
   const [showMenu, setShowMenu] = useState(false);
+  const {connectWallet, address} = useStateContext()
   return (
     <nav className="bg-black w-full text-white md:px-32 px-3">
       <div className="flex justify-between items-center">
@@ -42,7 +44,7 @@ export default function MainNavbar() {
             Tokens
           </a>
           <button className="block px-8 border border-white ml-auto">
-            Connect Wallet
+          {address ? `${address.slice(0,5)}...${address.slice(30, 40)}` : "Connect Wallet"}
           </button>
         </div>
       </div>
