@@ -13,6 +13,12 @@ _Overall, Token Wordle provides a fun and engaging puzzle experience while also 
 ## How we built it
 Smart contract was written for staking fee and rewards, while chainlink Vrf was used for random words for unique gamplay and guesses with secure random words. the ui was built with next-js 13 for smooth routing and speed. **check out link** [link](https://token-wordle.vercel.app/) and **Github link** [link](https://github.com/joeephwild/token-wordle).
 
+## Contracts
+**Staking Token**[0xF9Ed570Aa6EC5402aB445ca6F2152A192E54E252](https://testnet.ftmscan.com/address/0xF9Ed570Aa6EC5402aB445ca6F2152A192E54E252)
+**Game Contract**[0xd04f936879fFB6EeBe58F5ED5D1BeFAb44829586](https://testnet.ftmscan.com/address/0xd04f936879fFB6EeBe58F5ED5D1BeFAb44829586)
+**Staking Contract**[0xc82dB9326d0119048c8998713F58101ac7c64312](https://testnet.ftmscan.com/address/0xc82dB9326d0119048c8998713F58101ac7c64312)
+**Staking Token**[0xb2e9b7bfee36066eD8aeb706352135879CBc734F](https://testnet.ftmscan.com/address/0xb2e9b7bfee36066eD8aeb706352135879CBc734F)
+
 ## What's next for Token Wordle
 we hope to keep building after the hackathon by adding multiple games to the build and 
 
