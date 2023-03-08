@@ -7,12 +7,16 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "./RewardToken.sol";
 
+import "./interfaces/IGameContract.sol";
+
 error Staking__TransferFailed();
 error Withdraw__TransferFailed();
 error Staking__NeedsMoreThanZero();
+error Error__NotWonGame();
 
 contract Staking is ReentrancyGuard, RewardItem{
     IERC20 public s_stakingToken;
+    IGameContract public s_gameContract;
     uint256 public constant REWARD_PERCENTAGE = 1;
 
 
@@ -29,8 +33,9 @@ contract Staking is ReentrancyGuard, RewardItem{
         _;
     }
 
-    constructor(address stakingToken) {
+    constructor(address stakingToken, address _gameContract) {
         s_stakingToken = IERC20(stakingToken);
+        s_gameContract = IGameContract(_gameContract);
     }
 
    
@@ -62,7 +67,11 @@ contract Staking is ReentrancyGuard, RewardItem{
 
     function claimReward(string memory _tokenURI) external {
         //update logic to check if user won
+        if(s_gameContract.winners(msg.sender) == 0){
+            revert Error__NotWonGame();
+        }
         uint itemId = awardItem(msg.sender, _tokenURI);
+        s_gameContract.updateWinners(msg.sender, 0);
         if (itemId<=0) {
             revert Staking__TransferFailed();
         }
