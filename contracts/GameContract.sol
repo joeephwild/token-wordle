@@ -15,9 +15,9 @@ contract EncryptionContract {
     bytes32 private immutable wonSecretKey;
 
     // Constructor to initialize the secret keys
-    constructor(bytes32 _playedSecretKey, bytes32 _wonSecretKey) {
-        playedSecretKey = _playedSecretKey;
-        wonSecretKey = _wonSecretKey;
+    constructor(bytes memory _playedSecretKey, bytes memory _wonSecretKey) {
+        playedSecretKey = bytes32(_playedSecretKey);
+        wonSecretKey = bytes32(_wonSecretKey);
     }
 
     // Function to check if encrypted data is decrypted correctly for players
@@ -144,8 +144,8 @@ contract GameContract is EncryptionContract {
     constructor(
         uint256 _percent,
         address _stakingToken,
-        bytes32 _playedSecretKey,
-        bytes32 _wonSecretKey
+        bytes memory _playedSecretKey,
+        bytes memory _wonSecretKey
     ) EncryptionContract(_playedSecretKey, _wonSecretKey) {
         REWARD_AMOUNT = _percent;
         s_stakingToken = IERC20(_stakingToken);
