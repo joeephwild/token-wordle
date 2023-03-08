@@ -9,11 +9,14 @@ describe("Staking Test", async function () {
 
     beforeEach(async function () {
         const accounts = await ethers.getSigners()
-        deployer = await accounts[0]
+        deployer = accounts[0]
+
+        const Staking  =await ethers.getContractFactory("Staking")
+        const RewardToken  = await ethers.getContractFactory("RewardToken")
+
 
         await deployments.fixture(["rewardtoken", "staking"]) // deploys contracts
-        staking = await ethers.getContract("Staking")
-        rewardToken = await ethers.getContract("RewardToken")
+
         stakeAmount = ethers.utils.parseEther("100000")
     })
 
