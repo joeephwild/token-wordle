@@ -9,8 +9,9 @@ export default function StepperControl({ handleClick, currentStep, steps }) {
     await handleSignup();
     if(isSuccess){
       handleClick("next")
-    }else{
-      handleClick();
+    }else if(currentStep === 2){
+     addData();
+     handleClick("next")
     }
   }
     return (
@@ -25,13 +26,9 @@ export default function StepperControl({ handleClick, currentStep, steps }) {
         </button> 
   
         <button
-          onClick={() =>{ 
-            handleNext();
-            if(currentStep === 2){
-              addData()
-              handleClick("next");
-            }
-          }}
+          onClick={() =>
+            handleNext() 
+          }
           className="btn"
         >
           Continue

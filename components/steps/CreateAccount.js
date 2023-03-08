@@ -5,7 +5,6 @@ export default function Account() {
   const { userData, setUserData } = useStepperContext();
   const { email, password, setPassword, setConfirmPassword, confirmPassword, setEmail} = useStateContext()
 
-
   return (
     <div className="w-[70%] mx-auto mt-0">
     <h1 className="text-center font-medium text-5xl">Create your account</h1>

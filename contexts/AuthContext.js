@@ -15,6 +15,7 @@ export function AuthContextProvider({ children }) {
   const [lastName, setLastName] = useState("")
   const [registeredUser, setRegisteredUser] = useState({});
   const [isSuccess, setIsSuccess] = useState(false);
+  const [address, setAddress] = useState("")
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -28,7 +29,7 @@ export function AuthContextProvider({ children }) {
   const addData = async() => {
     try {
       const docRef = await addDoc(collection(db, "accounts"), {
-        firstName: firstName,
+        FirstName: firstName,
         lastName: lastName
       });
       console.log("Document written with ID: ", docRef.id);
@@ -59,6 +60,57 @@ export function AuthContextProvider({ children }) {
     }
   };
 
+  const connectWallet = async() => {
+    if(typeof window !== "undefined" && typeof window.ethereum !== "undefined"){
+      try {
+        const account = await window.ethereum.request({method: "eth_requestAccounts"});
+        console.log(account[0]);
+        setAddress(account[0])
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+
+  const getCurrentWalletConnected = async () => {
+    if (typeof window != "undefined" && typeof window.ethereum != "undefined") {
+      try {
+        const accounts = await window.ethereum.request({
+          method: "eth_accounts",
+        });
+        if (accounts.length > 0) {
+          setAddress(accounts[0]);
+          console.log(accounts[0]);
+        } else {
+          console.log("Connect to MetaMask using the Connect button");
+        }
+      } catch (err) {
+        console.error(err.message);
+      }
+    } else {
+      /* MetaMask is not installed */
+      console.log("Please install MetaMask");
+    }
+  };
+
+  const addWalletListener = async () => {
+    if (typeof window != "undefined" && typeof window.ethereum != "undefined") {
+      window.ethereum.on("accountsChanged", (accounts) => {
+        setAddress(accounts[0]);
+        console.log(accounts[0]);
+      });
+    } else {
+      /* MetaMask is not installed */
+      setWalletAddress("");
+      console.log("Please install MetaMask");
+    }
+  };
+
+  useEffect(() => {
+    addWalletListener();
+    getCurrentWalletConnected()
+  }, [address])
+
   return (
     <AuthContext.Provider
       value={{
@@ -76,7 +128,11 @@ export function AuthContextProvider({ children }) {
         setIsSuccess,
         firstName,
         lastName,
-        addData
+        addData,
+        address,
+        connectWallet,
+        setFirstName,
+        setLastName
       }}
     >
       {children}
