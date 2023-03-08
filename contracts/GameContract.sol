@@ -150,5 +150,10 @@ contract GameContract is EncryptionContract {
             revert Error__NotWon();
         }
     }
-    
+
+    function updateWinners(address _sender,uint _amount) external{
+        winners[_sender] = _amount;
+    }
+
+
 }
