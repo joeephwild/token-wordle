@@ -50,8 +50,8 @@ async function main() {
     constructorArguments: [
       percent,
       stakingToken.address,
-      ethers.utils.formatBytes32String(playedSecretKey.toString()),
-      ethers.utils.formatBytes32String(wonSecretKey.toString()),
+      ethers.utils.toUtf8Bytes(playedSecretKey),
+      ethers.utils.toUtf8Bytes(wonSecretKey),
     ],
   });
   await hre.run(`verify:verify`, {
