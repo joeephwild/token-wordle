@@ -1,5 +1,5 @@
 ## Inspiration
-### The inspiration behind this projects was to deliver an amazing game play with a very unique popular game, with amazing rewards to keep players glued while playing. so you earn while you play but in much better way.
+_The inspiration behind this projects was to deliver an amazing game play with a very unique popular game, with amazing rewards to keep players glued while playing. so you earn while you play but in much better way._
 ## What it does
 _Token Wordle is a unique puzzle game built on blockchain technology, allowing for exciting gameplay mechanics and rewards. Similar to Wordle, players can earn tokens for each game they play and win, and these tokens can be staked for a set period of time to earn even more tokens as they play._
 
@@ -16,6 +16,7 @@ Smart contract was written for staking fee and rewards, while chainlink Vrf was 
 ## What's next for Token Wordle
 we hope to keep building after the hackathon by adding multiple games to the build and 
 
+[FigmaLink](https://www.figma.com/file/bBQImW8v2Gd0ttCiZPhK4Y/Token-Wordle?node-id=0%3A1)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 ## Getting Started
