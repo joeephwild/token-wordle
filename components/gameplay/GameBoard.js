@@ -5,47 +5,38 @@ import Keyboard from "./Keyboard";
 import WordBox from "./WordBox";
 
 export default function GameBoard() {
-  const [wordBoxes, setWordBoxes] = useState(Array(6).fill([]));
-  const [currentWbIndex, setCurrentWbIndex] = useState(0);
+  const [wordBoxes, setWordBoxes] = useState([]);
+  // const [currentWbIndex, setCurrentWbIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
   const displayModal = () => {
     setShowModal(!showModal);
   };
   const getKeyboardInput = (letter) => {
+    console.log(wordBoxes);
     if (letter === "Enter") {
       // move to next word box if current one is full
-      if (wordBoxes[currentWbIndex].length === 5) {
-        setCurrentWbIndex((index) => index + 1);
-      }
+      // if (wordBoxes[currentWbIndex].length === 5) {
+      //   setCurrentWbIndex((index) => index + 1);
+      // }
+      //run checks instead
     } else if (letter === "Del") {
       // remove last letter from current word box
-      setWordBoxes((boxes) => {
-        const currentBox = boxes[currentWbIndex];
-        if (currentBox.length > 0) {
-          return [
-            ...boxes.slice(0, currentWbIndex),
-            currentBox.slice(0, -1),
-            ...boxes.slice(currentWbIndex + 1),
-          ];
-        } else {
-          return boxes;
-        }
-      });
+      // const currentBox = boxes[currentWbIndex];
+      if (wordBoxes.length > 0) {
+        let tempBox = [...wordBoxes];
+        tempBox.pop();
+        // console.log(tempBox);
+        setWordBoxes(tempBox);
+      }
     } else {
       // add letter to current word box
-      setWordBoxes((boxes) => {
-        const currentBox = boxes[currentWbIndex];
-        if (currentBox.length < 5) {
-          return [
-            ...boxes.slice(0, currentWbIndex),
-            [...currentBox, letter],
-            ...boxes.slice(currentWbIndex + 1),
-          ];
-        } else {
-          return boxes;
-        }
-      });
+      if (wordBoxes.length <= 5) {
+        console.log(letter);
+        let tempBox = [...wordBoxes, letter];
+        // console.log(tempBox);
+        setWordBoxes(tempBox);
+      }
     }
   };
 
@@ -61,17 +52,13 @@ export default function GameBoard() {
               className="mt-3"
             />
           </a>
-          <GameScoreCard clickHandler={displayModal}/>
+          <GameScoreCard clickHandler={displayModal} />
           <div className="mt-5 flex w-[80%] mx-auto gap-12">
-            <div className="w-[50%]">
-              {wordBoxes.slice(0, 3).map((box, index) => (
+            <div className="w-full">
+              {/* {wordBoxes.slice(3).map((box, index) => (
                 <WordBox key={index} wordArray={box} />
-              ))}
-            </div>
-            <div className="w-[50%]">
-              {wordBoxes.slice(3).map((box, index) => (
-                <WordBox key={index} wordArray={box} />
-              ))}
+              ))} */}
+              <WordBox wordArray={wordBoxes} />
             </div>
           </div>
           <div className="mt-5">
