@@ -11,13 +11,31 @@ const GameplayContext = React.createContext({
   initGame: () => {},
   timerState: { seconds: 0, minutes: 0 },
   wordState: [],
-  updateWordState: (letter) => {},
+  updateWordState: (wordArray) => {},
 });
 
 export const GameplayContextProvider = (props) => {
   const [isStarted, setIsStarted] = useState(false);
   const [time, setTime] = useState(300);
   const [timerState, setTimerState] = useState({ minutes: 0, seconds: 0 });
+  const [gottenWord, setGottenWord] = useState([]);
+
+  const updateWordState = (wordArray) => {
+    let isAllCorrect = true;
+    for (let i = 0; i < wordArray.length; i++) {
+      const letter = wordArray[i].letter;
+      if (gottenWord.includes(letter)) {
+        wordArray[i].status = "wrong";
+      }
+      if (gottenWord[i] === letter) {
+        wordArray[i].status = "right";
+      } else {
+        isAllCorrect = false;
+      }
+    }
+
+    return { modWordArray: wordArray, isAllCorrect: isAllCorrect };
+  };
 
   const startTimer = () => {
     let timeC = 300;
@@ -36,15 +54,11 @@ export const GameplayContextProvider = (props) => {
   const initGame = () => {
     setIsStarted(true);
     startTimer();
+    //fetch gotten word
+    //setstate
+    setGottenWord(["t", "o", "k", "e", "n"]);
   };
-  // return () => clearInterval(interval);
-  //   };
-  //   const loginHandler = (email, password) => {
-  //     // We should of course check email and password
-  //     // But it's just a dummy/ demo anyways
-  //     localStorage.setItem("isLoggedIn", "1");
-  //     setIsLoggedIn(true);
-  //   };
+
   useEffect(() => {
     setTimerState({ minutes: Math.floor(time / 60), seconds: time % 60 });
     console.log(timerState);
@@ -56,6 +70,7 @@ export const GameplayContextProvider = (props) => {
         isStarted: isStarted,
         initGame: initGame,
         timerState: timerState,
+        updateWordState: updateWordState,
         // wordState: wordState,
       }}
     >

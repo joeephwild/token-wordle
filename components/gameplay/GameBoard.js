@@ -6,7 +6,7 @@ import WordBox from "./WordBox";
 import GameplayContext from "../../contexts/GameplayContext";
 
 export default function GameBoard() {
-  const [wordBoxes, setWordBoxes] = useState([]);
+  const [wordArray, setWordArray] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   const ctx = useContext(GameplayContext);
@@ -15,26 +15,38 @@ export default function GameBoard() {
     setShowModal(!showModal);
   };
   const getKeyboardInput = (letter) => {
-    console.log(wordBoxes);
+    console.log(wordArray);
     if (letter === "Enter") {
       //run checks instead
-      // ctx.initGame();
+      //check array length is 5
+      if (wordArray.length == 5) {
+        //if true , then :
+        //pass it to ctx
+        const { modWordArray, isAllCorrect } = ctx.updateWordState(wordArray);
+        //which would return object of if all is true
+        if (isAllCorrect) {
+          alert("won");
+          setWordArray(modWordArray);
+        } else {
+          setWordArray(modWordArray);
+        }
+      }
     } else if (letter === "Del") {
       // remove last letter from current word box
-      if (wordBoxes.length > 0) {
-        let tempBox = [...wordBoxes];
+      if (wordArray.length > 0) {
+        let tempBox = [...wordArray];
         tempBox.pop();
-        setWordBoxes(tempBox);
+        setWordArray(tempBox);
       }
     } else {
       // add letter to current word box
       if (!ctx.isStarted) {
         ctx.initGame();
       }
-      if (wordBoxes.length <= 5) {
-        console.log(letter);
-        let tempBox = [...wordBoxes, letter];
-        setWordBoxes(tempBox);
+      if (wordArray.length <= 5) {
+        // console.log(letter);
+        let tempBox = [...wordArray, { letter: letter }];
+        setWordArray(tempBox);
       }
     }
   };
@@ -54,7 +66,7 @@ export default function GameBoard() {
           <GameScoreCard clickHandler={displayModal} />
           <div className="mt-5 flex w-[80%] mx-auto gap-12">
             <div className="w-full">
-              <WordBox wordArray={wordBoxes} />
+              <WordBox wordArray={wordArray} />
             </div>
           </div>
           <div className="mt-5">
