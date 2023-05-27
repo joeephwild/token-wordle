@@ -1,4 +1,8 @@
-export default function GameScoreCard({clickHandler}) {
+import { useContext } from "react";
+import GameplayContext from "../../contexts/GameplayContext";
+
+export default function GameScoreCard({ clickHandler }) {
+  const ctx = useContext(GameplayContext);
   return (
     <div className="bg-white w-[80%] mx-auto p-3 px-5 flex justify-between items-center">
       <div className="flex justify-between w-64 items-center">
@@ -8,7 +12,11 @@ export default function GameScoreCard({clickHandler}) {
         </h1>
       </div>
       <div className="item-start justify-self-start">
-        <h1 className="text-[#ff0000] text-3xl">4:59</h1>
+        {ctx.timerState && (
+          <h1 className="text-[#ff0000] text-3xl">
+            {ctx.timerState.minutes}:{ctx.timerState.seconds}
+          </h1>
+        )}
       </div>
       <div onClick={() => clickHandler()}>
         <img src="./images/medical-icon_i-information-us.png" />
