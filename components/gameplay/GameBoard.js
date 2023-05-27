@@ -1,51 +1,53 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import GameScoreCard from "./GameScoreCard";
 import InstructionModal from "./InstructionModal";
 import Keyboard from "./Keyboard";
 import WordBox from "./WordBox";
+import GameplayContext from "../../contexts/GameplayContext";
 
 export default function GameBoard() {
-  const [wordBoxes, setWordBoxes] = useState(Array(6).fill([]));
-  const [currentWbIndex, setCurrentWbIndex] = useState(0);
+  const [wordArray, setWordArray] = useState([]);
   const [showModal, setShowModal] = useState(false);
+
+  const ctx = useContext(GameplayContext);
 
   const displayModal = () => {
     setShowModal(!showModal);
   };
   const getKeyboardInput = (letter) => {
+    console.log(wordArray);
     if (letter === "Enter") {
-      // move to next word box if current one is full
-      if (wordBoxes[currentWbIndex].length === 5) {
-        setCurrentWbIndex((index) => index + 1);
+      //run checks instead
+      //check array length is 5
+      if (wordArray.length == 5) {
+        //if true , then :
+        //pass it to ctx
+        const { modWordArray, isAllCorrect } = ctx.updateWordState(wordArray);
+        //which would return object of if all is true
+        if (isAllCorrect) {
+          alert("won");
+          setWordArray(modWordArray);
+        } else {
+          setWordArray(modWordArray);
+        }
       }
     } else if (letter === "Del") {
       // remove last letter from current word box
-      setWordBoxes((boxes) => {
-        const currentBox = boxes[currentWbIndex];
-        if (currentBox.length > 0) {
-          return [
-            ...boxes.slice(0, currentWbIndex),
-            currentBox.slice(0, -1),
-            ...boxes.slice(currentWbIndex + 1),
-          ];
-        } else {
-          return boxes;
-        }
-      });
+      if (wordArray.length > 0) {
+        let tempBox = [...wordArray];
+        tempBox.pop();
+        setWordArray(tempBox);
+      }
     } else {
       // add letter to current word box
-      setWordBoxes((boxes) => {
-        const currentBox = boxes[currentWbIndex];
-        if (currentBox.length < 5) {
-          return [
-            ...boxes.slice(0, currentWbIndex),
-            [...currentBox, letter],
-            ...boxes.slice(currentWbIndex + 1),
-          ];
-        } else {
-          return boxes;
-        }
-      });
+      if (!ctx.isStarted) {
+        ctx.initGame();
+      }
+      if (wordArray.length <= 5) {
+        // console.log(letter);
+        let tempBox = [...wordArray, { letter: letter }];
+        setWordArray(tempBox);
+      }
     }
   };
 
@@ -61,14 +63,11 @@ export default function GameBoard() {
               className="mt-3"
             />
           </a>
-          <GameScoreCard clickHandler={displayModal}/>
-          <div className="mt-5 flex w-[80%] items-center justify-center mx-auto gap-12">
-            <div className="w-[50%]">
-              {wordBoxes.slice(0, 3).map((box, index) => (
-                <WordBox key={index} wordArray={box} />
-              ))}
+          <GameScoreCard clickHandler={displayModal} />
+          <div className="mt-5 flex w-[80%] mx-auto gap-12">
+            <div className="w-full">
+              <WordBox wordArray={wordArray} />
             </div>
-           
           </div>
           <div className="mt-5">
             <Keyboard clickHandler={getKeyboardInput} />

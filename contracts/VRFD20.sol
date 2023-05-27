@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.7;
+pragma solidity 0.8.19;
 
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
@@ -13,9 +13,9 @@ contract VRFD20 is VRFConsumerBaseV2 {
     // Your subscription ID.
     uint64 s_subscriptionId;
 
-    // Sepolia coordinator. For other networks,
+    // Fantom coordinator. For other networks,
     // see https://docs.chain.link/docs/vrf-contracts/#configurations
-    address vrfCoordinator = 0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625;
+    address vrfCoordinator = 0xbd13f08b8352A3635218ab9418E340c60d6Eb418;
 
     // The gas lane to use, which specifies the maximum gas price to bump to.
     // For a list of available gas lanes on each network,
@@ -50,7 +50,7 @@ contract VRFD20 is VRFConsumerBaseV2 {
     /**
      * @notice Constructor inherits VRFConsumerBaseV2
      *
-     * @dev NETWORK: Sepolia
+     * @dev NETWORK: Fantom Testnet
      *
      * @param subscriptionId subscription id that this consumer contract can use
      */
@@ -111,20 +111,20 @@ contract VRFD20 is VRFConsumerBaseV2 {
     }
 
     /**
-     * @notice Get the house assigned to the player once the address has rolled
+     * @notice Get the word assigned to the player once the address has rolled
      * @param player address
-     * @return house as a string
+     * @return word as a string
      */
-    function house(address player) public view returns (string memory) {
+    function word(address player) public view returns (string memory) {
         require(s_results[player] != 0, "Dice not rolled");
         require(s_results[player] != ROLL_IN_PROGRESS, "Roll in progress");
         return getWord(s_results[player]);
     }
 
     /**
-     * @notice Get the house name from the id
+     * @notice Get the word name from the id
      * @param id uint256
-     * @return house name string
+     * @return word name string
      */
     function getWord(uint256 id) private pure returns (string memory) {
         string[261] memory words = [

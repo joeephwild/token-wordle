@@ -6,7 +6,7 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const API_KEY = process.env.API_KEY;
 
 module.exports = {
-  solidity: '0.8.17',
+  solidity: '0.8.19',
   settings: {
     optimizer: {
       enabled: true,
