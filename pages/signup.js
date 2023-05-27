@@ -47,7 +47,7 @@ function App() {
       {endReg ? (
         <Final />
       ) : (
-        <div className="mx-auto rounded-2xl pb-2 md:w-[70%]">
+        <div className="mx-aut rounded-2xl pb-2 md:w-[80%]">
           {/* Stepper */}
           <div className="horizontal container mt-5">
             <Stepper steps={steps} currentStep={currentStep} />

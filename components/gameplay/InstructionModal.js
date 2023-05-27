@@ -16,8 +16,8 @@ export default function InstructionModal({ clickHandler }) {
       </div>
 
       <p className="mt-3 w-[40%] text-center text-white mx-auto">
-        Try guessing the corrrect word in six (6) tries. After each try, the
-        tile changes colour to show you how close you were to the correct word
+        Try guessing the correct word in six (6) tries. After each try, the
+        tile changes color to show you how close you were to the correct word
         You get 20 points for each correct word and spot
       </p>
       <h2 className="mt-3 text-2xl text-center text-white"> See this!</h2>

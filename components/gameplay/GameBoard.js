@@ -50,7 +50,7 @@ export default function GameBoard() {
   };
 
   return (
-    <div className="h-full bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-20 border border-gray-100 w-[90%] mx-auto mt-8 py-12 relative">
+    <div className="h-full bg-gray-400 rounded-md bg-clip-padding backdrop-filter mt-10 backdrop-blur-lg bg-opacity-20 border border-gray-100 w-[90%] mx-auto mt-8 py-12 relative">
       {showModal && <InstructionModal clickHandler={displayModal} />}
       {!showModal && (
         <>
@@ -62,17 +62,13 @@ export default function GameBoard() {
             />
           </a>
           <GameScoreCard clickHandler={displayModal}/>
-          <div className="mt-5 flex w-[80%] mx-auto gap-12">
+          <div className="mt-5 flex w-[80%] items-center justify-center mx-auto gap-12">
             <div className="w-[50%]">
               {wordBoxes.slice(0, 3).map((box, index) => (
                 <WordBox key={index} wordArray={box} />
               ))}
             </div>
-            <div className="w-[50%]">
-              {wordBoxes.slice(3).map((box, index) => (
-                <WordBox key={index} wordArray={box} />
-              ))}
-            </div>
+           
           </div>
           <div className="mt-5">
             <Keyboard clickHandler={getKeyboardInput} />
