@@ -21,7 +21,7 @@ Smart contract was written for staking fee and rewards, while chainlink Vrf was 
 **Staking Token**[0xb2e9b7bfee36066eD8aeb706352135879CBc734F](https://testnet.ftmscan.com/address/0xb2e9b7bfee36066eD8aeb706352135879CBc734F)
 
 ## What's next for Token Wordle
-we hope to keep building after the hackathon by adding multiple games to the build and 
+we hope to keep building after the hackathon by adding multiple games to the build
 
 [FigmaLink](https://www.figma.com/file/bBQImW8v2Gd0ttCiZPhK4Y/Token-Wordle?node-id=0%3A1)
 

@@ -40,8 +40,8 @@ export default function MainNavbar() {
           <a href="" className="block px-8 py-4 hover:border">
             Scores
           </a>
-          <a href="" className="block px-8 py-4 hover:border">
-            Tokens
+          <a href="/staking" className="block px-8 py-4 hover:border">
+            Stake
           </a>
           <button className="block px-8 border border-white ml-auto">
           {address ? `${address.slice(0,5)}...${address.slice(30, 40)}` : "Connect Wallet"}
