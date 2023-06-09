@@ -35,7 +35,6 @@ contract VRFD20 is VRFConsumerBaseV2, EncryptionContract {
     // For this example, retrieve 1 random value in one request.
     // Cannot exceed VRFCoordinatorV2.MAX_NUM_WORDS.
     uint32 numWords = 1;
-    address s_owner;
 
     // map rollers to requestIds
     mapping(uint256 => address) private s_rollers;
@@ -61,7 +60,6 @@ contract VRFD20 is VRFConsumerBaseV2, EncryptionContract {
         bytes32 _keyHash
     ) VRFConsumerBaseV2(vrfCoordinator) EncryptionContract(_secretKey) {
         COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
-        s_owner = msg.sender;
         s_subscriptionId = subscriptionId;
         s_keyHash = _keyHash;
     }
@@ -74,9 +72,7 @@ contract VRFD20 is VRFConsumerBaseV2, EncryptionContract {
      *
      * @param roller address of the roller
      */
-    function rollDice(
-        address roller
-    ) public onlyOwner returns (uint256 requestId) {
+    function rollDice(address roller) public returns (uint256 requestId) {
         require(
             block.timestamp >= s_lastRequestTime[roller] + 1 days,
             "Can only request once per day"
@@ -125,10 +121,12 @@ contract VRFD20 is VRFConsumerBaseV2, EncryptionContract {
      * @param player address
      * @return word as a string
      */
-    function word(address player) public view returns (bytes32) {
+    function word(address player) public view returns (bytes32[5] memory) {
         require(s_results[player] != 0, "Dice not rolled");
         require(s_results[player] != ROLL_IN_PROGRESS, "Roll in progress");
-        return encryptWord(getWord(s_results[player]));
+        string memory userWord = getWord(s_results[player]);
+
+        return encryptWord(userWord);
     }
 
     /**
@@ -401,10 +399,5 @@ contract VRFD20 is VRFConsumerBaseV2, EncryptionContract {
             "turns"
         ];
         return words[id - 1];
-    }
-
-    modifier onlyOwner() {
-        require(msg.sender == s_owner);
-        _;
     }
 }

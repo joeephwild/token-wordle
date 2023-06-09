@@ -17,7 +17,11 @@ contract GameContract is EncryptionContract {
     uint256 public immutable REWARD_PERCENTAGE;
     IStaking public immutable s_stakingContract;
 
-    event GameStarted(address player, uint256 startTime, bytes32 codedWord);
+    event GameStarted(
+        address player,
+        uint256 startTime,
+        bytes32[5] codedWordArray
+    );
     event PlayedGame(
         address indexed player,
         bool indexed isWon,
@@ -40,22 +44,22 @@ contract GameContract is EncryptionContract {
     //mapping that stores winners
     address[] private winners;
     //mapping that stores users encryptedword
-    mapping(address => bytes32) private userToCodedWord;
+    mapping(address => bytes32[5]) private userToCodedWordArray;
     //mapping that maps users time of play
     mapping(address => uint256) timeOfPlay;
 
-    function startGame(bytes32 _codedWord) public {
+    function startGame(bytes32[5] memory _codedWordArray) public {
         //update user's word
-        userToCodedWord[msg.sender] = _codedWord;
+        userToCodedWordArray[msg.sender] = _codedWordArray;
         //update user time
         timeOfPlay[msg.sender] = block.timestamp;
 
-        emit GameStarted(msg.sender, block.timestamp, _codedWord);
+        emit GameStarted(msg.sender, block.timestamp, _codedWordArray);
     }
 
     function playedGame(
-        bytes32 _encryptedWord,
-        string memory _word
+        bytes32[5] memory _encryptedWordArray,
+        string[5] memory _wordArray
     ) public returns (bool) {
         if (block.timestamp == 0) {
             revert Error__NotPlayed();
@@ -67,7 +71,7 @@ contract GameContract is EncryptionContract {
         uint _payAmount = (REWARD_PERCENTAGE * userStake) / 100;
         s_stakingToken.transfer(msg.sender, _payAmount);
 
-        bool isWon = isCorrect(_encryptedWord, _word);
+        bool isWon = isCorrect(_encryptedWordArray, _wordArray);
         //check if won
         if (isWon) {
             winners.push(msg.sender);
@@ -80,7 +84,11 @@ contract GameContract is EncryptionContract {
         return winners;
     }
 
-    function fetchPlayerInfo() public view returns (bytes32, uint256) {
-        return (userToCodedWord[msg.sender], timeOfPlay[msg.sender]);
+    function fetchPlayerInfo()
+        public
+        view
+        returns (bytes32[5] memory, uint256)
+    {
+        return (userToCodedWordArray[msg.sender], timeOfPlay[msg.sender]);
     }
 }
