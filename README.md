@@ -1,3 +1,4 @@
+
 ## Inspiration
 _The inspiration behind this projects was to deliver an amazing game play with a very unique popular game, with amazing rewards to keep players glued while playing. so you earn while you play but in much better way._
 ## What it does

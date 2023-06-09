@@ -17,26 +17,14 @@ module.exports = {
     mainnet: {
       url: `https://rpcapi.fantom.network`,
       chainId: 250,
-      accounts: [`0x${PRIVATE_KEY}`]
+      accounts: [PRIVATE_KEY]
     },
     testnet: {
-      url: `https://rpc.ankr.com/fantom_testnet`,
-      chainId: 4002,
-      accounts: [`0x${PRIVATE_KEY}`],
-      live: false
+      url: `https://responsive-bitter-dew.matic-testnet.discover.quiknode.pro/1f696bc52fd01bcff7203b0af7b7fa89de4e2805/`,
+      chainId: 80001,
+      accounts: [PRIVATE_KEY],
     },
-    coverage: {
-      url: 'http://localhost:8555'
-    },
-    localhost: {
-      url: `http://127.0.0.1:8545`
-    }
   },
-  etherscan: {
-    apiKey: {
-      ftmTestnet: API_KEY,
-      opera: API_KEY
-    }
-  }
+ 
  
 };
