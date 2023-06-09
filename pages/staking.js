@@ -10,8 +10,9 @@ import { useGameContext } from "../contexts";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Staking() {
-  const [stake, setStake] = useState();
-  const { callStakeToken, userStake, totalStake } = useGameContext();
+  const [stake, setStake] = useState("");
+  const { callStakeToken, userStake, totalStake, userBalance } =
+    useGameContext();
   console.log(userStake);
   return (
     <>
@@ -34,7 +35,9 @@ export default function Staking() {
                 className="form-input px-4 py-3 rounded-lg w-full bg-gray-100 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-20  "
                 placeholder="10"
               />
-              <p className="text-gray-400">You will have 0 remaining</p>
+              <p className="text-gray-400">
+                You will have {Number(userBalance) - Number(stake)} remaining
+              </p>
             </div>
             <button
               onClick={() => callStakeToken(stake)}
