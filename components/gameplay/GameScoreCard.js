@@ -1,8 +1,12 @@
-import { useContext } from "react";
-import GameplayContext from "../../contexts/GameplayContext";
+import { useEffect } from "react";
+import { useGameContext } from "../../contexts";
 
 export default function GameScoreCard({ clickHandler }) {
-  const ctx = useContext(GameplayContext);
+  const { timerState, updateTimerState, time } = useGameContext();
+
+  useEffect(() => {
+    updateTimerState();
+  }, [time]);
   return (
     <div className="bg-white w-[80%] mx-auto p-3 px-5 flex justify-between items-center">
       <div className="flex justify-between w-64 items-center">
@@ -12,9 +16,9 @@ export default function GameScoreCard({ clickHandler }) {
         </h1>
       </div>
       <div className="item-start justify-self-start">
-        {ctx.timerState && (
+        {timerState && (
           <h1 className="text-[#ff0000] text-3xl">
-            {ctx.timerState.minutes}:{ctx.timerState.seconds}
+            {timerState.minutes}:{timerState.seconds}
           </h1>
         )}
       </div>

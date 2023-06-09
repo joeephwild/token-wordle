@@ -7,7 +7,7 @@ export default function LetterBox({ letter, status }) {
     );
   } else if (status === "wrong") {
     return (
-      <div className="w-20 h-20 flex justify-center items-center bg-red-600 text-4xl p-5 rounded-xl uppercase font-bold text-white">
+      <div className="w-20 h-20 flex justify-center items-center bg-yellow-600 text-4xl p-5 rounded-xl uppercase font-bold text-white">
         {letter}
       </div>
     );
