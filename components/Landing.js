@@ -5,7 +5,7 @@ export default function LogReg1() {
         <img
           src="./images/LandingImage.png"
           alt=""
-          className="w-[80%] block mx-auto"
+          className="w-full"
         />
       </div>
       <div className="md:flex w-[80%] mx-auto justify-around items-center mt-16">
