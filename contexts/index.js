@@ -14,8 +14,9 @@ export const Gameplay = createContext();
 export const GameplayProvider = (props) => {
   const router = useRouter();
   const { address } = useStateContext();
-  console.log(address)
+  console.log(address);
   const [userStake, setUserStake] = useState("");
+  const [totalStake, setTotalStake] = useState("");
 
   async function connectToNetwork() {
     if (window.ethereum) {
@@ -30,10 +31,10 @@ export const GameplayProvider = (props) => {
   async function callStakeToken(value) {
     try {
       const provider = await connectToNetwork();
-  
+
       // Get the signer (connected account)
       const signer = provider.getSigner();
-  
+
       // Create a contract instance
       const amount = ethers.utils.parseEther(value.toString());
       const contract = new ethers.Contract(
@@ -46,17 +47,17 @@ export const GameplayProvider = (props) => {
       router.push("/game");
     } catch (error) {
       alert(error.message);
-      console.log(error.message)
+      console.log(error.message);
     }
   }
-  
+
   async function callWithdrawToken(value) {
     try {
       const provider = await connectToNetwork();
-  
+
       // Get the signer (connected account)
       const signer = provider.getSigner();
-  
+
       // Create a contract instance
       const amount = ethers.utils.parseEther(value.toString());
       const contract = new ethers.Contract(
@@ -71,14 +72,14 @@ export const GameplayProvider = (props) => {
       alert(error.message);
     }
   }
-  
+
   async function callGetStakedToken() {
     try {
       const provider = await connectToNetwork();
-  
+
       // Get the signer (connected account)
       const signer = provider.getSigner();
-  
+
       // Create a contract instance
       const contract = new ethers.Contract(
         stakingContract,
@@ -92,8 +93,29 @@ export const GameplayProvider = (props) => {
     }
   }
 
+  async function callTotalStakedToken() {
+    try {
+      const provider = await connectToNetwork();
+
+      // Get the signer (connected account)
+      const signer = provider.getSigner();
+
+      // Create a contract instance
+      const contract = new ethers.Contract(
+        stakingContract,
+        stakingabit,
+        signer
+      );
+      const tx = await contract.s_totalSupply();
+      setTotalStake(tx.toString()); // Convert the BigNumber to a string
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
   useEffect(() => {
     callGetStakedToken();
+    callTotalStakedToken();
   }, [address]);
 
   return (
@@ -101,14 +123,14 @@ export const GameplayProvider = (props) => {
       value={{
         callStakeToken,
         callWithdrawToken,
-        userStake
+        userStake,
+        totalStake,
       }}
     >
       {props.children}
     </Gameplay.Provider>
   );
 };
-
 
 export const useGameContext = () => {
   const contextValue = useContext(Gameplay);
