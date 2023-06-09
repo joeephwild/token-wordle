@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function StakingHeader() {
   return (
     <>
@@ -8,9 +10,9 @@ export default function StakingHeader() {
         <div className="px-10 py-5 w-1/4 text-center bg-white cursor-pointer">
           <h1>Staked Assets</h1>
         </div>
-        <div className="px-10 py-5 w-1/4 text-center bg-white cursor-pointer">
+        <Link href="/withdrawal" className="px-10 py-5 w-1/4 text-center bg-white cursor-pointer">
           <h1>Withdrawal</h1>
-        </div>
+        </Link>
       </div>
       <hr className="mb-3" />
     </>
