@@ -14,14 +14,23 @@ _Overall, Token Wordle provides a fun and engaging puzzle experience while also 
 ## How we built it
 Smart contract was written for staking fee and rewards, while chainlink Vrf was used for random words for unique gamplay and guesses with secure random words. the ui was built with next-js 13 for smooth routing and speed. **check out link** [link](https://token-wordle.vercel.app/) and **Github link** [link](https://github.com/joeephwild/token-wordle).
 
+ HAS BEEN DEPLOYED TO ________ 
+STAKING CONTRACT HAS BEEN DEPLOYED TO ________ 
+GAME CONTRACT HAS BEEN DEPLOYED TO ________ 
+SUCCESSFULLY SENT 95 PERCENT , TXN HASH IS _____ 0xa9d032e5e21752dfffb02558a5f9bb4b035ffd61c98c47a9b6b80c857772c73d
+vrfd20Contract was successfully deployed to _______ 
+
 ## Contracts
-**Staking Token**[0xF9Ed570Aa6EC5402aB445ca6F2152A192E54E252](https://testnet.ftmscan.com/address/0xF9Ed570Aa6EC5402aB445ca6F2152A192E54E252)
-**Game Contract**[0xd04f936879fFB6EeBe58F5ED5D1BeFAb44829586](https://testnet.ftmscan.com/address/0xd04f936879fFB6EeBe58F5ED5D1BeFAb44829586)
-**Staking Contract**[0xc82dB9326d0119048c8998713F58101ac7c64312](https://testnet.ftmscan.com/address/0xc82dB9326d0119048c8998713F58101ac7c64312)
-**Staking Token**[0xb2e9b7bfee36066eD8aeb706352135879CBc734F](https://testnet.ftmscan.com/address/0xb2e9b7bfee36066eD8aeb706352135879CBc734F)
+**STAKING TOKEN**[0x431b2b148EE63DFdc7D0e73df389A7865EccBfe5](https://mumbai.polygonscan.com/address/0x431b2b148EE63DFdc7D0e73df389A7865EccBfe5)
+
+**Game Contract**[0x6039efb5080fE3f652F7ACE3C81313f3F00BB987](https://mumbai.polygonscan.com/address/0x6039efb5080fE3f652F7ACE3C81313f3F00BB987)
+
+**Staking Contract**[0x46f6391f0625f33a10a63875bBb6577B952411c2](https://mumbai.polygonscan.com/address/0x46f6391f0625f33a10a63875bBb6577B952411c2)
+**Randomizer Contract**[0x0A3478083407Fa46bA842d066b7a4A80a710dd43](https://mumbai.polygonscan.com/address/0x0A3478083407Fa46bA842d066b7a4A80a710dd43)
 
 ## What's next for Token Wordle
 we hope to keep building after the hackathon by adding multiple games to the build
+check out contract code at https:///github.com/Otaiki1/token-wordle-contracts
 
 [FigmaLink](https://www.figma.com/file/bBQImW8v2Gd0ttCiZPhK4Y/Token-Wordle?node-id=0%3A1)
 
