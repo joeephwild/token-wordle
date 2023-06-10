@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import GameScoreCard from "./GameScoreCard";
 import InstructionModal from "./InstructionModal";
 import Keyboard from "./Keyboard";

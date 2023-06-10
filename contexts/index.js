@@ -30,6 +30,7 @@ export const GameplayProvider = (props) => {
   const [isStarted, setIsStarted] = useState(false);
   const [gameEnded, setGameEnded] = useState(false);
   const [userBalance, setUserBalance] = useState(false);
+  const [hasRolledDie, setHasRolledDie] = useState(false);
 
   async function connectToNetwork() {
     if (window.ethereum) {
@@ -109,7 +110,7 @@ export const GameplayProvider = (props) => {
       const tx = await contract.getStaked(address);
       setUserStake(tx.toString()); // Convert the BigNumber to a string
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   }
   async function callGetUserBalance() {
@@ -128,7 +129,7 @@ export const GameplayProvider = (props) => {
       const tx = await contract.balanceOf(address);
       setUserBalance(tx.toString()); // Convert the BigNumber to a string
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   }
 
@@ -154,6 +155,35 @@ export const GameplayProvider = (props) => {
 
   //gamePlay functionalities
 
+  async function rollYourDie() {
+    try {
+      const provider = await connectToNetwork();
+
+      // Get the signer (connected account)
+      const signer = provider.getSigner();
+
+      // Create a contract instance
+      const VrfdContract = new ethers.Contract(vrfdContract, vrfdabi, signer);
+      if (!hasRolledDie) {
+        const tx = await VrfdContract.rollDice(address);
+        await tx.wait(); // Await the transaction to be mined
+        // Wait for 5 minutes
+        await new Promise((resolve) => setTimeout(resolve, 300000));
+        alert("Your die has rolled successfully, you can proceed to game play");
+        setHasRolledDie(true);
+        router.push("/game");
+      } else {
+        alert("you have rolled already");
+        if (hasRolledDie) {
+          router.push("/game");
+        }
+      }
+    } catch (error) {
+      alert(error.message);
+      console.log(error.message);
+    }
+  }
+
   async function fetchUserWord() {
     try {
       const provider = await connectToNetwork();
@@ -164,10 +194,15 @@ export const GameplayProvider = (props) => {
       // Create a contract instance
       const VrfdContract = new ethers.Contract(vrfdContract, vrfdabi, signer);
       const GameContract = new ethers.Contract(gameContract, gameabi, signer);
-      // const tx = await VrfdContract.rollDice(address);
-      // await tx.wait(); // Await the transaction to be mined
-      // // Wait for 25 seconds
-      // await new Promise((resolve) => setTimeout(resolve, 25000));
+      if (!hasRolledDie) {
+        const tx = await VrfdContract.rollDice(address);
+        await tx.wait(); // Await the transaction to be mined
+        alert("WAIT FOR 5 MINUTES");
+        // Wait for 5 minutes
+        await new Promise((resolve) => setTimeout(resolve, 300000));
+        alert("wait ended , game can begin");
+      }
+
       const playersWord = await VrfdContract.word(address);
       console.log("Players Word is ____", playersWord);
       setUserWordArray(playersWord);
@@ -279,6 +314,8 @@ export const GameplayProvider = (props) => {
         time,
         callGetUserBalance,
         userBalance,
+        hasRolledDie,
+        rollYourDie,
       }}
     >
       {props.children}
